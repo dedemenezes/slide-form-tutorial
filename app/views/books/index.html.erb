@@ -1,0 +1,35 @@
+<h1>Books</h1>
+<ul>
+  <% @books.each do |book| %>
+    <li><%= book.name %></li>
+  <% end %>
+</ul>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" data-controller='slide-form'>
+        <%= simple_form_for @book do |f| %>
+          <%= f.input :name, wrapper_html: { class: 'show_input', data: { slide_form_target: 'input' } } %>
+          <%= f.input :description, wrapper_html: { class: 'hide_input',  data: { slide_form_target: 'input' }} %>
+          <%= f.submit class: 'hide_input',data: { slide_form_target: 'input' } %>
+        <% end %>
+        <button data-action='click->slide-form#next' data-slide-form-target='next'>Next</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
